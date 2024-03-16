@@ -11,8 +11,20 @@ input.disabled = true
 const renderTask = (task) => {
     const li = document.createElement('li')
     li.setAttribute('class', 'list-group-item')
-    li.innerHTML = task.getText()
+    renderSpan(li,task.getText())
+    renderLink(li,task.getId())
     list.append(li)
+}
+
+const renderSpan = (li,text) => {
+    const span = li.appendChild(document.createElement('span'))
+    span.innerHTML = text
+}
+
+const renderLink = (li,id) => {
+    const a = li.appendChild(document.createElement('a'))
+    a.innerHTML = '<i class="bi bi-trash"></i>'
+    a.setAttribute('style','float: right')
 }
 
 // To fetch data from server to the frontend
