@@ -21,13 +21,14 @@ const getTasks = () => {
         tasks.forEach(task => {
             renderTask(task)
         })
+        input.disabled = false
     }).catch((error) => {
         alert(error)
     })    
 }
 
 //To save data to the server from the frontend
-const saveTask = async(task) => {
+/*const saveTask = async(task) => {
     try{
         const json = JSON.stringify({description: task})
         const response = await fetch(BACKEND_ROOT_URL + '/new',{
@@ -41,16 +42,17 @@ const saveTask = async(task) => {
     } catch(error) {
         alert("Error saving task " + error.message)
     }
-}
+}*/
 
-input.addEventListener("keypress",(event) => {
-    if(event.key ==="Enter") {
+input.addEventListener('keypress',(event) => {
+    if(event.key ==='Enter') {
         event.preventDefault()
         const task = input.value.trim()
-        if(task != '') {
-            saveTask(task).then((json) => {
+        if(task !== '') {
+            todos.addTask(task).then((task) => {
                 renderTask(task)
-            input.value = ""
+                input.value = ''
+                input.focus()
             })            
         }
     }
